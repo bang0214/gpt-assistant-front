@@ -1,31 +1,34 @@
 <template>
   <div class="NavigationBar">
-    <div :class="controlDisplay?'leftNavigation':'leftNavigation_active'" v-if="isLeftMenu">
+    <div
+      :class="controlDisplay ? 'leftNavigation' : 'leftNavigation_active'"
+      v-if="isLeftMenu"
+    >
       <el-avatar
-          class="headPortrait"
-          :size="70"
-          :icon="UserFilled"
-          :src="
+        class="headPortrait"
+        :size="70"
+        :icon="UserFilled"
+        :src="
           store.getters.userinfo.avatar
             ? imageUrl + store.getters.userinfo.avatar
             : require('../assets/logoHead.svg')
         "
       />
       <div class="surplus" v-if="store.getters.userinfo">
-        SUPER币 {{ store.getters.userinfo.frequency }}
+        提问次数 {{ store.getters.userinfo.frequency }}
       </div>
       <div v-else @click="loginVisible = true" class="loginBut">登录</div>
       <div class="header">
         <div class="switch-button">
           <router-link
-              v-for="(item, index) in navigationList"
-              :key="index"
-              active-class="switch-active"
-              class="switch-item"
-              :to="item.to"
+            v-for="(item, index) in navigationList"
+            :key="index"
+            active-class="switch-active"
+            class="switch-item"
+            :to="item.to"
           >
             <el-icon>
-              <component :is="item.icon"/>
+              <component :is="item.icon" />
             </el-icon>
             <div class="switch-item-title">{{ item.title }}</div>
           </router-link>
@@ -34,17 +37,17 @@
 
       <div class="bottom">
         <el-avatar
-            :size="40"
-            :icon="UserFilled"
-            :src="require('../assets/logoHead.svg')"
+          :size="40"
+          :icon="UserFilled"
+          :src="require('../assets/logoHead.svg')"
         />
         <div class="bottomRight">
-          <div class="bottomRightName">TIME SEA PLUS</div>
-          <div class="bottomRightEdition">v1.4.1</div>
+          <div class="bottomRightName">GPT ASSISTANT</div>
+          <div class="bottomRightEdition">v1.0.0</div>
         </div>
       </div>
-      <div class="control-display" @click="controlDisplay=!controlDisplay">
-        {{ controlDisplay ? '隐藏' : '显示' }}
+      <div class="control-display" @click="controlDisplay = !controlDisplay">
+        {{ controlDisplay ? "隐藏" : "显示" }}
       </div>
     </div>
     <div class="rightContent">
@@ -52,29 +55,35 @@
         <!-- TODO 要缓存 -->
         <KeepAlive>
           <component
-              :is="Component"
-              :key="$route.name"
-              v-if="$route.meta.keepAlive"
+            :is="Component"
+            :key="$route.name"
+            v-if="$route.meta.keepAlive"
           ></component>
         </KeepAlive>
         <!-- TODO 不缓存 -->
         <component
-            :is="Component"
-            :key="$route.name"
-            v-if="!$route.meta.keepAlive"
+          :is="Component"
+          :key="$route.name"
+          v-if="!$route.meta.keepAlive"
         ></component>
       </RouterView>
     </div>
   </div>
 
-  <LoginDialog :show="loginVisible" @close="loginVisible = false"/>
+  <LoginDialog :show="loginVisible" @close="loginVisible = false" />
 </template>
 
 <script>
-import {defineComponent, onMounted, ref, watch} from "vue";
-import {useRouter} from "vue-router";
+import { defineComponent, onMounted, ref, watch } from "vue";
+import { useRouter } from "vue-router";
 // eslint-disable-next-line no-unused-vars
-import {ChatDotSquare, MessageBox, Odometer, ScaleToOriginal, UserFilled,} from "@element-plus/icons-vue";
+import {
+  ChatDotSquare,
+  MessageBox,
+  Odometer,
+  ScaleToOriginal,
+  UserFilled,
+} from "@element-plus/icons-vue";
 import router from "@/router";
 import store from "../store";
 import LoginDialog from "@/components/LoginDialog.vue";
@@ -95,7 +104,7 @@ export default defineComponent({
     },
   },
   setup() {
-    let controlDisplay = ref(true)
+    let controlDisplay = ref(true);
     let router = useRouter();
     // TODO DATA
     let loginVisible = ref(false);
@@ -127,14 +136,14 @@ export default defineComponent({
     const isLeftMenu = ref(true);
 
     watch(
-        () => router.currentRoute.value,
-        (newValue) => {
-          isHeadNavigation.value = newValue.meta.isHeadNavigation;
-          isLeftMenu.value = newValue.meta.isLeftMenu;
-        },
-        {
-          immediate: true,
-        }
+      () => router.currentRoute.value,
+      (newValue) => {
+        isHeadNavigation.value = newValue.meta.isHeadNavigation;
+        isLeftMenu.value = newValue.meta.isLeftMenu;
+      },
+      {
+        immediate: true,
+      }
     );
     const imageUrl = ref("");
     onMounted(() => {

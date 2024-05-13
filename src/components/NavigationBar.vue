@@ -61,7 +61,7 @@
           "
           class="hidden-xs-only"
         >
-          <el-button text
+          <!-- <el-button text
             >打赏
 
             <template v-slot:icon>
@@ -69,7 +69,7 @@
                 <Goods />
               </el-icon>
             </template>
-          </el-button>
+          </el-button> -->
         </div>
         <div class="header-right">
           <div class="header-user-wrapper">
@@ -99,13 +99,13 @@
                     v-if="store.getters.userinfo.type === 'ADMIN'"
                     >控制台</el-dropdown-item
                   >
-                  <el-dropdown-item @click="router().push({ path: '/Orders' })"
+                  <!-- <el-dropdown-item @click="router().push({ path: '/Orders' })"
                     >打赏记录</el-dropdown-item
-                  >
-                  <el-dropdown-item
+                  > -->
+                  <!-- <el-dropdown-item
                     @click="router().push({ path: '/Exchange' })"
                     >兑换中心</el-dropdown-item
-                  >
+                  > -->
                   <el-dropdown-item @click="switchTheme"
                     >切换到{{
                       store.getters.themeInfo.switchText

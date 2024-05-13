@@ -15,12 +15,12 @@
           <div class="head_img"></div>
         </div>
         <div class="login-title">
-          <div
+          <!-- <div
             :class="loginType === 0 ? 'login-selected' : ''"
             @click="switchLoginType(0)"
           >
             微信登录
-          </div>
+          </div> -->
           <div
             :class="loginType === 1 ? 'login-selected' : ''"
             @click="switchLoginType(1)"
@@ -29,7 +29,7 @@
           </div>
         </div>
         <!--微信扫码登录-->
-        <div v-if="loginType === 0">
+        <div v-if="loginType === 1">
           <div class="form">
             <div class="animation" v-if="!qrCodeLoaded">
               <view class="loading-model">
@@ -65,7 +65,7 @@
         </div>
         <!--登录-->
         <div
-          v-if="loginType === 1"
+          v-if="loginType === 0"
           style="margin-top: 40px; padding: 0 60px 50px"
         >
           <el-form @keyup.enter="onSubmit" ref="formRef" size="large">

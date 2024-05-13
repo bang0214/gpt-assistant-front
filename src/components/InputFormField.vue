@@ -28,8 +28,8 @@
         placeholder="Ai模型"
         @change="updateModel"
       >
-        <el-option value="BASIC" label="智能" />
-        <el-option value="ADVANCED" label="增强" />
+        <el-option value="BASIC" label="GPT3.5" />
+        <el-option value="ADVANCED" label="GPT4" />
       </el-select>
       <el-input
         :style="{ marginLeft: needSelect ? '0px' : '10px' }"
