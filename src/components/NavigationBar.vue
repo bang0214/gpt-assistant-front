@@ -1,13 +1,13 @@
 <template>
   <nav class="header">
     <div class="header-side">
-      <div
+      <!-- <div
         @click="appletDialogVisible = true"
         class="rechargeButton hidden-xs-only applet"
       >
         <img class="appletIcon" :src="require('../assets/applet.svg')" />
         <div class="rechargeButtonText themeColorText">微信小程序</div>
-      </div>
+      </div> -->
     </div>
     <div v-if="isHeadNavigation" class="header-center">
       <div class="switch-button">
@@ -189,10 +189,10 @@ export default defineComponent({
         title: "实验室",
         to: "/laboratory",
       },
-      {
-        title: "绘图",
-        to: "/drawing_text_view",
-      },
+      // {
+      //   title: "绘图",
+      //   to: "/drawing_text_view",
+      // },
     ]);
 
     watch(

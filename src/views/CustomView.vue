@@ -9,7 +9,7 @@
         <el-icon>
           <Goods />
         </el-icon>
-        <div class="consumeText">每次提问消耗1个SUPER币</div>
+        <div class="consumeText">每次提问消耗1次次数</div>
       </div>
       <div class="beCareful">请注意不支持违法、违规等不当信息内容</div>
     </div>
@@ -218,34 +218,35 @@ export default {
         // TODO 上下文
         let messages = [];
         conversationList.value
-            .slice(-memory.value)
-            .forEach(({isError, user, assistant}, index, arr) => {
-              if (!isError) {
-                let truncatedUser = user
-                let truncatedAssistant = assistant
-                if (arr.length > 2) {
-                  if (index !== arr.length - 1 && index !== arr.length - 2) {
-                    truncatedUser =
-                        user.length > size.value ? user.slice(0, size.value) + "..." : user;
-                    truncatedAssistant =
-                        assistant && assistant.length > size.value
-                            ? assistant.slice(0, size.value) + "..."
-                            : assistant;
-                  }
-                }
-                messages.push({
-                  role: "user",
-                  content: truncatedUser,
-                });
-                if (truncatedAssistant) {
-                  messages.push({
-                    role: "assistant",
-                    content: truncatedAssistant,
-                  });
+          .slice(-memory.value)
+          .forEach(({ isError, user, assistant }, index, arr) => {
+            if (!isError) {
+              let truncatedUser = user;
+              let truncatedAssistant = assistant;
+              if (arr.length > 2) {
+                if (index !== arr.length - 1 && index !== arr.length - 2) {
+                  truncatedUser =
+                    user.length > size.value
+                      ? user.slice(0, size.value) + "..."
+                      : user;
+                  truncatedAssistant =
+                    assistant && assistant.length > size.value
+                      ? assistant.slice(0, size.value) + "..."
+                      : assistant;
                 }
               }
-
-            });
+              messages.push({
+                role: "user",
+                content: truncatedUser,
+              });
+              if (truncatedAssistant) {
+                messages.push({
+                  role: "assistant",
+                  content: truncatedAssistant,
+                });
+              }
+            }
+          });
         dataIndex.value = index;
         webSocket({
           messages: {
